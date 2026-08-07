@@ -1,0 +1,53 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+
+
+@theme {
+  --color-primary: #FCF8F8;
+  --color-secondary: #FBEFEF;
+  --color-accent-light: #F9DFDF;
+  --color-accent: #F5AFAF;
+  --color-accent-hover: #F59797;
+  --color-dark: #2D2D2D;
+  --color-gray: #6B7280;
+  --font-sans: 'Montserrat', sans-serif;
+  --font-heading: 'Cormorant Garamond', serif;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.8s ease-out;
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color4);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #f59797;
+}

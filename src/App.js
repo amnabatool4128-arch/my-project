@@ -1,42 +1,31 @@
-import React, { useState } from 'react'
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import Home from "./Pages/Home";
+import About from "./Pages/About";
+import Services from "./Pages/Services";
+import Portfolio from "./Pages/Portfolio";
+import Teams from "./Pages/Teams";
+import Blog from "./Pages/Blog";
+import Contact from "./Pages/Contact";
+import Header from "./Components/Header";
+import Footer from "./Components/Footer";
 
 const App = () => {
-  const [color, setColor] = useState("#60a5eb");
-  const colors = [
-    "#ef4444",
-    "#22c55e",
-    "#3b82f6",
-    "#8b5cf6",
-    "#f97316",
-    "#ec4899",
-  ];
   return (
-    <div
-      className="w-full h-screen transition-all duration-500"
-      style={{ backgroundColor: color }}
-    >
-      <div className="fixed flex flex-wrap justify-center top-12 inset-x-0 px-2">
-        <div className="flex flex-wrap justify-center gap-4 shadow-lg bg-white px-3 py-2 rounded-2xl">
-          {
-  colors.map((item) => (
-    <button
-      key={item}
-      onClick={() => setColor(item)}
-      style={{ backgroundColor: item }}
-      className="outline-none px-4 py-1 rounded-full text-white shadow-lg"
-    >
-      {item}
-    </button>
-  ))}
-  
-
-        </div>
-      </div>
+    <div>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/portfolio" element={<Portfolio />} />
+        <Route path="/teams" element={<Teams />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+      <Footer />
     </div>
   );
-}
+};
 
-export default App
-
-
-
+export default App;

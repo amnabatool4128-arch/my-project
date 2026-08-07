@@ -1,12 +1,29 @@
-import React, { useState } from "react";
-import { services } from "../assets/contactData";
-import { submitContactForm } from "../services/api";
+import React, { useEffect, useState } from "react";
+import { getSiteContent, submitContactForm } from "../services/api";
 
 const initialState = { name: "", email: "", phone: "", service: "", message: "" };
 
 const ContactForm = () => {
   const [formData, setFormData] = useState(initialState);
   const [status, setStatus] = useState({ loading: false, success: false, error: "" });
+  const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [contentError, setContentError] = useState("");
+
+  useEffect(() => {
+    const loadContent = async () => {
+      try {
+        const response = await getSiteContent("contact");
+        setServices(response.data?.content?.services || []);
+      } catch (err) {
+        setContentError(err.message || "Unable to load contact services.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadContent();
+  }, []);
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -41,6 +58,8 @@ const ContactForm = () => {
           {status.error}
         </div>
       )}
+
+      {contentError && <div className="mb-4 p-4 bg-red-100 text-red-700 rounded-lg">{contentError}</div>}
 
       <form onSubmit={handleSubmit}>
         {/* Name & Email */}
@@ -107,7 +126,7 @@ const ContactForm = () => {
             className="w-full px-6 py-2 border-2 border-accent focus:outline-none"
           >
             <option value="">Select a Service</option>
-            {services.map((service, index) => (
+            {!loading && services.map((service, index) => (
               <option key={index} value={service}>
                 {service}
               </option>

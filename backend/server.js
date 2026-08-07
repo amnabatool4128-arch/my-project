@@ -8,7 +8,11 @@ dotenv.config();
 console.log("MONGO_URI =", process.env.MONGO_URI);
 
 // Connect to MongoDB
-connectDB();
+connectDB().then((connected) => {
+  if (!connected) {
+    console.warn("MongoDB connection failed. Continuing without a database for now.");
+  }
+});
 
 const app = express();
 
@@ -29,6 +33,7 @@ app.use("/api/projects", require("./routes/projectRoutes"));
 app.use("/api/blog", require("./routes/blogRoutes"));
 app.use("/api/services", require("./routes/serviceRoutes"));
 app.use("/api/team", require("./routes/teamRoutes"));
+app.use("/api/content", require("./routes/contentRoutes"));
 
 // Health check
 app.get("/api/health", (req, res) => {

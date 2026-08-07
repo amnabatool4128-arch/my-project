@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import PageHero from "../Components/PageHero";
 import Story from "../Components/Story";
 import Values from "../Components/Values";
 import Timeline from "../Components/Timeline";

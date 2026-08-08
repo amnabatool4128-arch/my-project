@@ -12,7 +12,7 @@ const Values = () => {
     const loadContent = async () => {
       try {
         const response = await getSiteContent("about");
-        setValues(response.data?.values || []);
+        setValues(response.data?.content?.values || []);
       } catch (err) {
         setError(err.message || "Unable to load values.");
       } finally {

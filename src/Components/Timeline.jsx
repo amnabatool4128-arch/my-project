@@ -11,7 +11,7 @@ const Timeline = () => {
     const loadContent = async () => {
       try {
         const response = await getSiteContent("about");
-        setTimeline(response.data?.timeline || []);
+        setTimeline(response.data?.content?.timeline || []);
       } catch (err) {
         setError(err.message || "Unable to load timeline content.");
       } finally {

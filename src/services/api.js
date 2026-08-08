@@ -3,7 +3,8 @@
  * All backend calls go through here so the base URL is set in one place.
  */
 
-const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+const rawBaseUrl = (process.env.REACT_APP_API_URL || "http://localhost:5000/api").replace(/\/+$/, "");
+const BASE_URL = rawBaseUrl.endsWith("/api") ? rawBaseUrl : `${rawBaseUrl}/api`;
 
 const request = async (endpoint, options = {}, fallbackValue = null) => {
   try {
